@@ -1,5 +1,6 @@
 class mtx() :
 
+    s = '+'
     # initializes matrices
     def __init__(self, mtrs = [[]], m = 1, n = 1) :
         
@@ -26,7 +27,7 @@ class mtx() :
         self.mtrs = mtrs
     
     # checks if matrices is valid
-    def ifvalid(self) :
+    def isvalid(self) :
         for i in self.mtrs :
             if len(i) != len(self.mtrs[0]) :
                 return(False)
@@ -71,12 +72,52 @@ class mtx() :
         else :
             return
     
+    # checks if matrices is a square matrices
+    def issquare(self) :
+        if self.order('m') == self.order('n') :
+            return(True)
+        else :
+            return(False)
+
+    # checks if matrices is a 2x2 matrices
+    def istwo(self) :
+        if (self.order('m') == 2) and (self.order('n') == 2) :
+            return(True)
+        else :
+            return(False)
+
     # returns the determinant value of the matrices
     def det(self) :
         det_mtrs = 0
-        if self.order(m) == self.order(n) :
-            pass
-
+        n = 0
+        m = []
+        val = []
+        if self.issquare() :
+            if self.istwo() :
+                det_mtrs = (self.mtrs[0][0] * self.mtrs[1][1]) - (self.mtrs[0][1] * self.mtrs[1][0])
+                return(det_mtrs)
+            else :
+                for i in self.mtrs[0] :
+                    if n == 0 :
+                        for j in self.mtrs[1:] :
+                            m.append(j[1:])
+                    elif n == len(self.mtrs[0])-1 :
+                        for j in self.mtrs[1:] :
+                            m.append(j[:-1])
+                    else :
+                        for j in self.mtrs[1:] :
+                            m.append(j[:n] + j[n+1:])
+                    val.append(i * mtx(m).det())
+                    m = []
+                    n += 1
+                for idx, i in enumerate(val) :
+                    if idx%2 == 0 :
+                        det_mtrs += i
+                    else :
+                        det_mtrs -= i
+                return(det_mtrs)
+        else:
+            return('Invalid')
 
     # defines matrices addition
     def __add__(self, other) :
@@ -125,12 +166,12 @@ class mtx() :
             mul_mtrs = [[]]
         return(mul_mtrs)
 
-mtrs1 = mtx([[1, 2], 
-            [3, 4],
-            [5, 6]])
-mtrs2 = mtx([[1, 2], 
-            [3, 4],
-            [5, 6]])
+mtrs1 = mtx([[1, 2, 3], 
+            [4, 5, 6],
+            [7, 8, 9]])
+mtrs2 = mtx([[6, 1, 1], 
+            [4, -2, 5],
+            [2, 8, 7]])
 mtrs3 = mtx([[1, 2], 
             [3, 4]])
 # mtrs1.display()
@@ -142,3 +183,6 @@ mtrs3 = mtx([[1, 2],
 # mtrs1.display()
 # print(mtrs1.order())
 # mtx(mtrs1 * mtrs3).display()
+#print(mtrs1.det())
+print(mtrs2.det())
+#print(mtrs3.det())
