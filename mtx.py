@@ -166,14 +166,15 @@ class mtx() :
             mul_mtrs = [[]]
         return(mul_mtrs)
 
-mtrs1 = mtx([[1, 2, 3], 
-            [4, 5, 6],
-            [7, 8, 9]])
-mtrs2 = mtx([[6, 1, 1], 
-            [4, -2, 5],
-            [2, 8, 7]])
-mtrs3 = mtx([[1, 2], 
-            [3, 4]])
+# DEBUGGING
+#mtrs1 = mtx([[1, 2, 3], 
+#            [4, 5, 6],
+#            [7, 8, 9]])
+#mtrs2 = mtx([[6, 1, 1], 
+#            [4, -2, 5],
+#            [2, 8, 7]])
+#mtrs3 = mtx([[1, 2], 
+#           [3, 4]])
 # mtrs1.display()
 # print(mtrs1.order())
 # print(mtrs1.ifvalid())
@@ -184,5 +185,5 @@ mtrs3 = mtx([[1, 2],
 # print(mtrs1.order())
 # mtx(mtrs1 * mtrs3).display()
 #print(mtrs1.det())
-print(mtrs2.det())
+#print(mtrs2.det())
 #print(mtrs3.det())
